@@ -29,4 +29,9 @@ class Pokemon extends Model
         
         return $pokemonInformation->get($key);
     }
+
+    public function type(){
+        $response = Http::get($this->url)->json();
+        $type = collect($response)->get('types'); // TODO
+    }
 }
