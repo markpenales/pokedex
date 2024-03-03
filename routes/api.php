@@ -22,3 +22,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/pokemons/{pokemon}/types', function (Pokemon $pokemon) {
     return response()->json(['data' => $pokemon->types()]);
 });
+Route::get('/pokemons', function (Request $request) {
+    $pokemons = Pokemon::all();
+
+    return response()->json(['data' => $pokemons]);
+});
+Route::get('/pokemons/{pokemon}', function ($pokemon) {
+    $pokemons = Pokemon::where('name', 'LIKE', "%$pokemon%")
+        ->orWhere('id', $pokemon)
+        ->get();
+
+    return response()->json(['data' => $pokemons]);
+});

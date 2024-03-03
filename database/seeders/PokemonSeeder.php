@@ -14,7 +14,7 @@ class PokemonSeeder extends Seeder
      */
     public function run(): void
     {
-        $url = "https://pokeapi.co/api/v2/pokemon?limit=10000";
+        $url = "https://pokeapi.co/api/v2/pokemon?limit=1010";
         $response = Http::get($url);
         $pokemons = $response->json()['results'];
 
