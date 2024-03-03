@@ -38,7 +38,7 @@ const onSearch = () => {
 </script>
 
 <template>
-    <div class="col-lg-6 d-flex gap-2 mb-5">
+    <div class="col-lg-6 d-flex gap-2 mb-5" style="z-index: 100;">
         <div class="col-lg-8">
             <input type="text" class="form-control" placeholder="Search" v-model="search" @input="onSearchChange"
                 @click="() => { suggestionTaken = false; }">

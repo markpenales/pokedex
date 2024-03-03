@@ -4,6 +4,7 @@ import { ref } from 'vue';
 
 const types = ref([])
 const loading = ref(true);
+const isHovered = ref(false)
 
 const props = defineProps({
     pokemon: {
@@ -27,7 +28,10 @@ onMounted(() => {
 
 <template>
     <div class="col-lg-3">
-        <div class="d-flex justify-content-center align-items-center">
+        <!-- TODO: Modal for pokemon -->
+        <div class="d-flex justify-content-center align-items-center"
+            :style="{ transform: isHovered ? 'scale(1.05)' : 'scale(1)', transition: 'transform 0.3s', cursor: 'pointer' }"
+            @mouseenter=" isHovered = true" @mouseleave="isHovered = false">
             <img :src="pokemon.image_url" :alt="pokemon.name" class="bg-light border-0 rounded">
         </div>
 
@@ -42,7 +46,7 @@ onMounted(() => {
                         <span class="visually-hidden">Loading...</span>
                     </div>
                 </div>
-                <div v-else v-for="pokemonType in types " class="capitalize px-1 border-0 rounded"
+                <div v-else v-for="pokemonType in types" class="capitalize px-1 border-0 rounded"
                     :style="{ 'background-color': pokemonType[1] }">
                     {{ pokemonType[0] }}
                 </div>
