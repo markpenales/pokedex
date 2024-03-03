@@ -33,13 +33,30 @@ const onSearchChanged = (value) => {
 }
 
 const onFilterChanged = (value) => {
-    pokemonList.value.sort((a, b)=>{
-        if(value === 'ID'){
+    pokemonList.value.sort((a, b) => {
+        if (value === 'ID') {
             return a.id - b.id;
         }
 
         return a.name.localeCompare(b.name)
     })
+}
+
+const loadMore = () => {
+    const lastPokemon = pokemonList.value[pokemonList.value.length - 1].id;
+    axios.get('/api/pokemons', {
+        params: {
+            lastPokemon: lastPokemon
+        }
+    })
+
+        .then(response => {
+            pokemonList.value = [...pokemonList.value, ...response.data.data]
+        })
+        .catch(error => {
+            console.error('Error fetching more pokemons:', error);
+        });
+
 }
 
 
@@ -58,7 +75,8 @@ const onFilterChanged = (value) => {
                     Pokédex
                 </div>
                 <div class="col-lg-6">
-                    <Search :pokemons="pokemonNames" @searchChanged="onSearchChanged" @filterChanged="onFilterChanged"/>
+                    <Search :pokemons="pokemonNames" @searchChanged="onSearchChanged"
+                        @filterChanged="onFilterChanged" />
                 </div>
             </div>
 
@@ -72,6 +90,8 @@ const onFilterChanged = (value) => {
                     <span class="visually-hidden">Loading...</span>
                 </div>
             </div>
+
+            <button class="btn btn-outline-success" @click="loadMore" v-if="!searching">Load More</button>
         </div>
     </div>
 

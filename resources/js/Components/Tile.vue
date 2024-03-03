@@ -5,6 +5,7 @@ import { ref } from 'vue';
 const types = ref([])
 const loading = ref(true);
 const isHovered = ref(false)
+const error = ref(false);
 
 const props = defineProps({
     pokemon: {
@@ -18,6 +19,9 @@ const getType = async () => {
         .then(response => {
             types.value = response.data.data;
             loading.value = false;
+        })
+        .catch(error => {
+            error.value = true;
         })
 }
 
@@ -45,6 +49,10 @@ onMounted(() => {
                     <div class="spinner-border" role="status">
                         <span class="visually-hidden">Loading...</span>
                     </div>
+                </div>
+                <div v-else-if="error" class="alert alert-danger d-flex align-items-center" role="alert">
+                    <span>Error: {{ error }}</span>
+                    <button type="button" class="btn-close" aria-label="Close" @click="error = null"></button>
                 </div>
                 <div v-else v-for="pokemonType in types" class="capitalize px-1 border-0 rounded"
                     :style="{ 'background-color': pokemonType[1] }">

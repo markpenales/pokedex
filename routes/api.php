@@ -23,7 +23,19 @@ Route::get('/pokemons/{pokemon}/types', function (Pokemon $pokemon) {
     return response()->json(['data' => $pokemon->types()]);
 });
 Route::get('/pokemons', function (Request $request) {
-    $pokemons = Pokemon::all();
+    $query = Pokemon::query()->take(10);
+
+    if ($request->has('lastPokemon')) {
+        $lastPokemonId = $request->input('lastPokemon');
+
+        $lastPokemon = Pokemon::find($lastPokemonId);
+
+        if ($lastPokemon) {
+            $query->where('id', '>', $lastPokemonId);
+        }
+    }
+
+    $pokemons = $query->get();
 
     return response()->json(['data' => $pokemons]);
 });

@@ -44,11 +44,11 @@ const changeFilter = () => {
 </script>
 
 <template>
-    <div class="col-lg-6 d-flex gap-2 mb-5 align-items-center" style="z-index: 100;">
+    <div class="col-lg-6 d-flex gap-2 mb-5 align-items-center">
         <div class="col-lg-7">
             <input type="text" class="form-control" placeholder="Search" v-model="search" @input="onSearchChange"
                 @click="() => { suggestionTaken = false; }">
-            <div class="position-absolute col-lg-4 bg-light pt-1" v-if="searchSuggestions.length && !suggestionTaken">
+            <div class="position-absolute col-lg-4 bg-light pt-1" v-if="searchSuggestions.length && !suggestionTaken" style="z-index: 100;">
                 <div class="border p-2 suggestion" v-for="suggestion in searchSuggestions" :key="suggestion"
                     @click="onClickSuggestion(suggestion)">{{ suggestion }}</div>
             </div>
