@@ -22,10 +22,13 @@ class Pokemon extends Model
         return $this->image_url;
     }
 
-    public function information($key){
+    public function information($key = null){
 
         $response = Http::get($this->url)->json();
         $pokemonInformation = collect($response);
+        if ($key === null) {
+            return $pokemonInformation;
+        }
         
         return $pokemonInformation->get($key);
     }

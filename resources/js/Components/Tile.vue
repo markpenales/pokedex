@@ -16,6 +16,11 @@ defineProps({
         <div>
             <span>#{{ String(pokemon.id).padStart(3, '0') }}</span>
         </div>
-        <div>{{ pokemon.name }}</div>
+        <div class="pokemon-name">{{ pokemon.name }}</div>
     </div>
 </template>
+<style>
+.pokemon-name{
+    text-transform: capitalize;
+}
+</style>
