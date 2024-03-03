@@ -19,13 +19,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/pokemons/{pokemon}/types', function(Pokemon $pokemon){
-    $types = $pokemon->information('types');
-    $typeNames = [];
-
-    foreach($types as $type){
-        $typeNames[] = $type['type']['name'];
-    }
-
-    dd($typeNames);
+Route::get('/pokemons/{pokemon}/types', function (Pokemon $pokemon) {
+    return response()->json(['data' => $pokemon->types()]);
 });

@@ -18,9 +18,11 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
+    $pokemonNames = Pokemon::query()->pluck('name');
     $pokemons = Pokemon::query()->take(10)->get();
-    return Inertia::render('Welcome',[
+    return Inertia::render('Welcome', [
         'pokemons' => $pokemons,
+        'pokemonNames' => $pokemonNames,
     ]);
 });
 
@@ -34,4 +36,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
