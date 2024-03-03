@@ -32,6 +32,16 @@ const onSearchChanged = (value) => {
         })
 }
 
+const onFilterChanged = (value) => {
+    pokemonList.value.sort((a, b)=>{
+        if(value === 'ID'){
+            return a.id - b.id;
+        }
+
+        return a.name.localeCompare(b.name)
+    })
+}
+
 
 </script>
 
@@ -47,14 +57,17 @@ const onSearchChanged = (value) => {
                 <div class="fs-2 col-lg-2">
                     Pokédex
                 </div>
-
-                <Search :pokemons="pokemonNames" @searchChanged="onSearchChanged" />
+                <div class="col-lg-6">
+                    <Search :pokemons="pokemonNames" @searchChanged="onSearchChanged" @filterChanged="onFilterChanged"/>
+                </div>
             </div>
+
             <Tile v-for="pokemon in pokemonList" :pokemon="pokemon" class="row py-2" v-if="!searching" />
             <div v-if="error">
                 {{ error }}
             </div>
-            <div v-if="!error && searching" class="border-0 rounded px-1 d-flex justify-content-center align-items-center">
+            <div v-if="!error && searching"
+                class="border-0 rounded px-1 d-flex justify-content-center align-items-center">
                 <div class="spinner-border" role="status">
                     <span class="visually-hidden">Loading...</span>
                 </div>

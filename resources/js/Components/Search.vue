@@ -13,7 +13,8 @@ const props = defineProps({
 const search = ref([]);
 const searchSuggestions = ref([]);
 const suggestionTaken = ref(false);
-const emits = defineEmits(['searchChanged'])
+const filter = ref('ID')
+const emits = defineEmits(['searchChanged', 'filterChanged'])
 
 
 const onClickSuggestion = (suggestion) => {
@@ -35,11 +36,16 @@ const onSearch = () => {
     emits('searchChanged', search.value);
 }
 
+const changeFilter = () => {
+    filter.value = filter.value === "ID" ? "Name" : "ID";
+    emits('filterChanged', filter.value)
+}
+
 </script>
 
 <template>
-    <div class="col-lg-6 d-flex gap-2 mb-5" style="z-index: 100;">
-        <div class="col-lg-8">
+    <div class="col-lg-6 d-flex gap-2 mb-5 align-items-center" style="z-index: 100;">
+        <div class="col-lg-7">
             <input type="text" class="form-control" placeholder="Search" v-model="search" @input="onSearchChange"
                 @click="() => { suggestionTaken = false; }">
             <div class="position-absolute col-lg-4 bg-light pt-1" v-if="searchSuggestions.length && !suggestionTaken">
@@ -53,6 +59,12 @@ const onSearch = () => {
                 <path stroke-linecap="round" stroke-linejoin="round"
                     d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
             </svg>
+        </button>
+
+        <button class="btn btn-outline-secondary" @click="changeFilter">
+            <span>
+                Sort By: {{ filter }}
+            </span>
         </button>
     </div>
 
