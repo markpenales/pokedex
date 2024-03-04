@@ -6,7 +6,7 @@ Sure, here's a basic README template to help users set up your Laravel project o
 
 ## Description
 
-Brief description of your project.
+A Pokedex utilizing the PokeAPI
 
 ## Prerequisites
 
@@ -55,7 +55,7 @@ Make sure you have the following installed on your machine:
 7. Migrate the database:
 
    ```bash
-   php artisan migrate
+   php artisan migrate --seed
    ```
 
 8. Install JavaScript dependencies:
@@ -77,26 +77,3 @@ Make sure you have the following installed on your machine:
     ```
 
     You can now access the application at `http://localhost:8000`.
-
-## Usage
-
-Describe how to use your application here.
-
-## Contributing
-
-If you'd like to contribute, please follow these steps:
-
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature-name`).
-3. Make your changes.
-4. Commit your changes (`git commit -am 'Add new feature'`).
-5. Push to the branch (`git push origin feature-name`).
-6. Create a new Pull Request.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
-
----
-
-Feel free to customize this README with more specific instructions or additional sections as needed for your project.
