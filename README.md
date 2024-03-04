@@ -12,11 +12,11 @@ A Pokedex utilizing the PokeAPI
 
 Make sure you have the following installed on your machine:
 
-- PHP (version X.X.X)
-- Composer (version X.X.X)
-- Node.js (version X.X.X)
-- npm (version X.X.X)
-- MySQL or other database system
+- PHP
+- Composer
+- Node.js
+- npm
+- MySQL
 
 ## Installation
 
